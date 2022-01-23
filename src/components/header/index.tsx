@@ -59,7 +59,7 @@ export default () => {
   const pathname = location.pathname;
   return (
     <div className={classes.header}>
-      <span className={classes.appTitle}>NEWS</span>
+      <span className={classes.appTitle}>GLOBAL NEWS</span>
       <ul className={classes.menu}>
         {ROUTERS.map((e) => (
           <li

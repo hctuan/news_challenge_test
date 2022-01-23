@@ -4,10 +4,6 @@ export const ROUTERS = [
     label: "Home"
   },
   {
-    link: '/general',
-    label: "General"
-  },
-  {
     link: '/business',
     label: "Business"
   },

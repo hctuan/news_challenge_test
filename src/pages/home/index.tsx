@@ -6,11 +6,15 @@ import ErrorSection from "./../../components/errorSection";
 import { IArticle } from "./../../utils/types";
 import moment from "moment";
 import { createUseStyles } from "react-jss";
-import NewRow from "./../../components/rowItem";
+import ListViewSection from "./Listview";
 
 const useStyle = createUseStyles({
+  home: {
+    padding: "0 32px",
+  },
   homeGridSection: {
-    padding: 32,
+    maxWidth: 1024,
+    margin: "auto",
   },
   homeGrid: {
     height: 400,
@@ -64,28 +68,23 @@ const useStyle = createUseStyles({
     overflow: "hidden",
     textOverflow: "ellipsis",
   },
-
-  homeListSection: {
-    padding: 32,
-    maxWidth: 1024,
-    margin: "auto",
-  },
-  homeList: {
-    display: "flex",
-    flexDirection: "column",
-    gap: 8,
+  title: {
+    textTransform: "uppercase",
+    padding: "16px 0",
+    color: "#1d5287",
+    letterSpacing: 2,
   },
 });
 
 export default () => {
   const { isLoading, error, data } = useQuery("loadHome", () =>
     fetch(
-      `https://newsapi.org/v2/top-headlines?apiKey=${process.env.REACT_APP_APIKEY}&country=us`
+      `https://newsapi.org/v2/top-headlines?apiKey=${process.env.REACT_APP_APIKEY}&category=general&page=1&pageSize=4`
     ).then((res) => res.json())
   );
   const classes = useStyle();
 
-  if (isLoading) return <Loading />;
+  if (isLoading) return <Loading style={{ height: "calc(100vh - 40px)" }} />;
   if (error) return <ErrorSection />;
 
   const allArticles = data.articles;
@@ -93,8 +92,9 @@ export default () => {
   const restArticles = allArticles.slice(4, allArticles.length);
 
   return (
-    <div>
+    <div className={classes.home}>
       <section className={classes.homeGridSection}>
+        <div className={classes.title}>Top headlines</div>
         <div className={classes.homeGrid}>
           {firstFourArticles.map((article: IArticle, index: number) => (
             <div
@@ -115,13 +115,8 @@ export default () => {
           ))}
         </div>
       </section>
-      <section className={classes.homeListSection}>
-        <div className={classes.homeList}>
-          {restArticles.map((article: IArticle, index: number) => (
-            <NewRow key={`list-item-${index}`} article={article} />
-          ))}
-        </div>
-      </section>
+
+      <ListViewSection />
     </div>
   );
 };

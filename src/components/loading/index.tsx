@@ -4,14 +4,21 @@ import classes from "*.module.css";
 
 const useStyle = createUseStyles({
   loading: {
-    height: "calc(100vh - 40px)",
     display: "flex",
     justifyContent: "center",
     alignItems: "center",
   },
 });
 
-export default () => {
+interface Props {
+  style?: Object;
+}
+
+export default ({ style }: Props) => {
   const classes = useStyle();
-  return <div className={classes.loading}>Loading...</div>;
+  return (
+    <div className={classes.loading} style={style}>
+      Loading...
+    </div>
+  );
 };

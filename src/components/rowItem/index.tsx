@@ -35,6 +35,8 @@ const useStyle = createUseStyles({
   },
   authorZone: {
     color: "gray",
+    gap: 4,
+    display: "flex",
   },
 });
 
@@ -49,7 +51,9 @@ export default ({ article }: Props) => {
         <div>{(article.content || "").split("…")[0] + "..."}</div>
         <div className={classes.authorZone}>
           <span>{article.author}</span>
-          <span>{moment(article.publishedAt).format("ll")}</span>
+          <span style={{ color: "#158A8C" }}>
+            {moment(article.publishedAt).format("ll")}
+          </span>
         </div>
       </div>
     </div>
