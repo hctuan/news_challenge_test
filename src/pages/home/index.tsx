@@ -6,7 +6,7 @@ import ErrorSection from "./../../components/errorSection";
 import { IArticle } from "./../../utils/types";
 import moment from "moment";
 import { createUseStyles } from "react-jss";
-import classes from "*.module.css";
+import NewRow from "./../../components/rowItem";
 
 const useStyle = createUseStyles({
   homeGridSection: {
@@ -64,6 +64,17 @@ const useStyle = createUseStyles({
     overflow: "hidden",
     textOverflow: "ellipsis",
   },
+
+  homeListSection: {
+    padding: 32,
+    maxWidth: 1024,
+    margin: "auto",
+  },
+  homeList: {
+    display: "flex",
+    flexDirection: "column",
+    gap: 8,
+  },
 });
 
 export default () => {
@@ -81,11 +92,9 @@ export default () => {
   const firstFourArticles = allArticles.slice(0, 4);
   const restArticles = allArticles.slice(4, allArticles.length);
 
-  console.log(".....", firstFourArticles, restArticles);
-
   return (
-    <div style={{ height: 9999 }}>
-      <div className={classes.homeGridSection}>
+    <div>
+      <section className={classes.homeGridSection}>
         <div className={classes.homeGrid}>
           {firstFourArticles.map((article: IArticle, index: number) => (
             <div
@@ -105,7 +114,14 @@ export default () => {
             </div>
           ))}
         </div>
-      </div>
+      </section>
+      <section className={classes.homeListSection}>
+        <div className={classes.homeList}>
+          {restArticles.map((article: IArticle, index: number) => (
+            <NewRow key={`list-item-${index}`} article={article} />
+          ))}
+        </div>
+      </section>
     </div>
   );
 };
