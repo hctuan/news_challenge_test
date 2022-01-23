@@ -35,6 +35,8 @@ const useStyle = createUseStyles({
       "& a": {
         textDecoration: "none",
         color: "#1E5287",
+        height: "100%",
+        display: "block",
       },
       "&.selected": {
         background: "#1E5287",
@@ -55,11 +57,12 @@ const useStyle = createUseStyles({
 export default () => {
   const classes = useStyle();
   const location = useLocation();
-
   const pathname = location.pathname;
   return (
     <div className={classes.header}>
-      <span className={classes.appTitle}>GLOBAL NEWS</span>
+      <span className={classes.appTitle}>
+        <span style={{ color: "#ef533a" }}>GLOBAL</span> NEWS
+      </span>
       <ul className={classes.menu}>
         {ROUTERS.map((e) => (
           <li

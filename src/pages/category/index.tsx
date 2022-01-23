@@ -12,25 +12,29 @@ import { useLocation } from "react-router-dom";
 const useStyle = createUseStyles({
   category: {
     padding: "0 32px",
+    maxWidth: 1024,
+    margin: "auto",
   },
   list: {
     padding: "32px 0",
-    maxWidth: 1024,
-    margin: "auto",
     display: "flex",
     flexDirection: "column",
     gap: 8,
+  },
+  title: {
+    textTransform: "uppercase",
+    padding: "16px 0",
+    color: "#1d5287",
+    letterSpacing: 2,
   },
 });
 
 export default () => {
   const location = useLocation();
-  const pathname = location.pathname;
+  const pathname = location.pathname.replaceAll("/", "");
   const { isLoading, error, data } = useQuery(["loadCatelory", pathname], () =>
     fetch(
-      `https://newsapi.org/v2/top-headlines?apiKey=${
-        process.env.REACT_APP_APIKEY
-      }&category=${pathname.replaceAll("/", "")}`
+      `https://newsapi.org/v2/top-headlines?apiKey=${process.env.REACT_APP_APIKEY}&category=${pathname}`
     ).then((res) => res.json())
   );
   const classes = useStyle();
@@ -41,6 +45,7 @@ export default () => {
   const articles = data.articles;
   return (
     <div className={classes.category}>
+      <div className={classes.title}>{pathname}</div>
       <div className={classes.list}>
         {articles.map((article: IArticle, index: number) => (
           <NewRow key={`list-item-${index}`} article={article} />
