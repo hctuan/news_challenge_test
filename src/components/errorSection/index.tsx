@@ -1,5 +1,24 @@
 import React from "react";
 
-export default () => {
-  return <section>Oops, somethings went wrong.</section>;
+interface Props {
+  reason?: string;
+}
+
+export default ({ reason }: Props) => {
+  return (
+    <section
+      style={{
+        height: 100,
+        display: "flex",
+        justifyContent: "center",
+        alignItems: "center",
+        fontSize: 32,
+        color: "#FF6464",
+        padding: 32,
+        textAlign: "center",
+      }}
+    >
+      <span>{reason || "Oops, somethings went wrong."}</span>
+    </section>
+  );
 };

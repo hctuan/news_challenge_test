@@ -1,5 +1,6 @@
 import React from "react";
 import { IArticle } from "./../../utils/types";
+import { noImageUrl } from "./../../utils/constants";
 import { createUseStyles } from "react-jss";
 import moment from "moment";
 
@@ -45,7 +46,10 @@ export default ({ article }: Props) => {
   const onGotoArticlePage = (url: string) => (window.location.href = url);
   return (
     <div className={classes.row} onClick={() => onGotoArticlePage(article.url)}>
-      <img className={classes.image} src={article.urlToImage}></img>
+      <img
+        className={classes.image}
+        src={article.urlToImage || noImageUrl}
+      ></img>
       <div className={classes.text}>
         <div className={classes.title}>{article.title}</div>
         <div>{(article.content || "").split("…")[0] + "..."}</div>

@@ -40,7 +40,8 @@ export default () => {
   const classes = useStyle();
 
   if (isLoading) return <Loading style={{ height: "calc(100vh - 40px)" }} />;
-  if (error) return <ErrorSection />;
+  if (error || data.status === "error")
+    return <ErrorSection reason={data.message || "unknown"} />;
 
   const articles = data.articles;
   return (
