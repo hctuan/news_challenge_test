@@ -1,6 +1,6 @@
 import React from "react";
 
-export default () => {
+function Footer() {
   return (
     <div
       style={{
@@ -17,4 +17,6 @@ export default () => {
       <span>Tuan Huynh</span>
     </div>
   );
-};
+}
+
+export default Footer;

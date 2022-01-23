@@ -53,8 +53,7 @@ const useStyle = createUseStyles({
     },
   },
 });
-
-export default () => {
+function Header() {
   const classes = useStyle();
   const location = useLocation();
   const pathname = location.pathname;
@@ -75,4 +74,6 @@ export default () => {
       </ul>
     </div>
   );
-};
+}
+
+export default Header;

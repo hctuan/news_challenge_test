@@ -1,10 +1,8 @@
 import React from "react";
-import { QueryClient, QueryClientProvider, useQuery } from "react-query";
-import { useComboState } from "./../../hooks";
+import { useQuery } from "react-query";
 import Loading from "./../../components/loading";
 import ErrorSection from "./../../components/errorSection";
 import { IArticle } from "./../../utils/types";
-import moment from "moment";
 import { createUseStyles } from "react-jss";
 import NewRow from "./../../components/rowItem";
 import { useLocation } from "react-router-dom";
@@ -29,10 +27,10 @@ const useStyle = createUseStyles({
   },
 });
 
-export default () => {
+function Category() {
   const location = useLocation();
   const pathname = location.pathname.replaceAll("/", "");
-  const { isLoading, error, data } = useQuery(["loadCatelory", pathname], () =>
+  const { isLoading, error, data } = useQuery(["loadCategory", pathname], () =>
     fetch(
       `https://newsapi.org/v2/top-headlines?apiKey=${process.env.REACT_APP_APIKEY}&category=${pathname}`
     ).then((res) => res.json())
@@ -54,4 +52,6 @@ export default () => {
       </div>
     </div>
   );
-};
+}
+
+export default Category;

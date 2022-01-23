@@ -41,7 +41,7 @@ const useStyle = createUseStyles({
   },
 });
 
-export default ({ article }: Props) => {
+function RowItem({ article }: Props) {
   const classes = useStyle();
   const onGotoArticlePage = (url: string) => (window.location.href = url);
   return (
@@ -49,6 +49,7 @@ export default ({ article }: Props) => {
       <img
         className={classes.image}
         src={article.urlToImage || noImageUrl}
+        alt="imageOfNew"
       ></img>
       <div className={classes.text}>
         <div className={classes.title}>{article.title}</div>
@@ -62,4 +63,6 @@ export default ({ article }: Props) => {
       </div>
     </div>
   );
-};
+}
+
+export default RowItem;

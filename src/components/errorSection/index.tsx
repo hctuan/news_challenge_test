@@ -4,7 +4,7 @@ interface Props {
   reason?: string;
 }
 
-export default ({ reason }: Props) => {
+function ErrorSection({ reason }: Props) {
   return (
     <section
       style={{
@@ -21,4 +21,6 @@ export default ({ reason }: Props) => {
       <span>{reason || "Oops, somethings went wrong."}</span>
     </section>
   );
-};
+}
+
+export default ErrorSection;

@@ -1,12 +1,12 @@
 import React from "react";
-import { QueryClient, QueryClientProvider, useQuery } from "react-query";
-import { useComboState } from "./../../hooks";
+import { useQuery } from "react-query";
+import moment from "moment";
+import { createUseStyles } from "react-jss";
+
 import Loading from "./../../components/loading";
 import ErrorSection from "./../../components/errorSection";
 import { IArticle } from "./../../utils/types";
 import { noImageUrl } from "./../../utils/constants";
-import moment from "moment";
-import { createUseStyles } from "react-jss";
 import ListViewSection from "./Listview";
 
 const useStyle = createUseStyles({
@@ -77,7 +77,7 @@ const useStyle = createUseStyles({
   },
 });
 
-export default () => {
+function Home() {
   const { isLoading, error, data } = useQuery("loadHome", () =>
     fetch(
       `https://newsapi.org/v2/top-headlines?apiKey=${process.env.REACT_APP_APIKEY}&category=general&page=1&pageSize=4`
@@ -121,4 +121,6 @@ export default () => {
       <ListViewSection />
     </div>
   );
-};
+}
+
+export default Home;

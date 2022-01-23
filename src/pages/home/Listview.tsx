@@ -1,10 +1,9 @@
 import React from "react";
-import { QueryClient, QueryClientProvider, useQuery } from "react-query";
+import { useQuery } from "react-query";
 import { useComboState } from "./../../hooks";
 import Loading from "./../../components/loading";
 import ErrorSection from "./../../components/errorSection";
 import { IArticle, ISource } from "./../../utils/types";
-import moment from "moment";
 import { createUseStyles } from "react-jss";
 import NewRow from "./../../components/rowItem";
 
@@ -60,9 +59,7 @@ const useStyle = createUseStyles({
   },
 });
 
-let timer: any;
-
-export default () => {
+function ListView() {
   const [state, setState] = useComboState({
     form: {
       q: "",
@@ -85,11 +82,7 @@ export default () => {
           }&sources=${state.search.sources}`
       ).then((res) => res.json())
   );
-  const {
-    isLoading: sourceLoading,
-    error: sourceError,
-    data: sourcesData,
-  } = useQuery("loadSources", () =>
+  const { data: sourcesData } = useQuery("loadSources", () =>
     fetch(
       `https://newsapi.org/v2/top-headlines/sources?apiKey=${process.env.REACT_APP_APIKEY}`
     ).then((res) => res.json())
@@ -159,4 +152,6 @@ export default () => {
       )}
     </section>
   );
-};
+}
+
+export default ListView;

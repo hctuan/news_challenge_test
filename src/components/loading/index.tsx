@@ -1,6 +1,5 @@
 import React from "react";
 import { createUseStyles } from "react-jss";
-import classes from "*.module.css";
 
 const useStyle = createUseStyles({
   loading: {
@@ -14,11 +13,13 @@ interface Props {
   style?: Object;
 }
 
-export default ({ style }: Props) => {
+function Loading({ style }: Props) {
   const classes = useStyle();
   return (
     <div className={classes.loading} style={style}>
       Loading...
     </div>
   );
-};
+}
+
+export default Loading;

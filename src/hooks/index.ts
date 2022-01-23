@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import { useState } from 'react';
 
 export const useComboState = (initialState: any) => {
   const [state, _setState] = useState(initialState);
